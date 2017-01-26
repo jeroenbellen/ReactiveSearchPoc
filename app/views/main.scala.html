@@ -1,0 +1,20 @@
+@(webJarAssets: WebJarAssets)(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>@title</title>
+    </head>
+    <body>
+        <div class="container">
+        @content
+        </div>
+
+        <script type='text/javascript' src='@routes.WebJarAssets.at(webJarAssets.locate("react.min.js"))'></script>
+        <script type='text/javascript' src='@routes.WebJarAssets.at(webJarAssets.locate("react-dom.min.js"))'></script>
+
+
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/app.js")'></script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+GET        /ws/search            controllers.SearchController.searchSocket
+
+
+GET        /                     controllers.WebPageController.index
+
+GET        /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
+
+GET        /webjars/*file        controllers.WebJarAssets.at(file)

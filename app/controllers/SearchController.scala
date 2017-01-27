@@ -4,7 +4,7 @@ import javax.inject.{Inject, Singleton}
 
 import actors.AutocompleteActor
 import akka.actor.ActorSystem
-import akka.stream.Materializer
+import akka.stream.{Materializer, OverflowStrategy}
 import play.api.libs.streams.ActorFlow
 import play.api.mvc.{Controller, WebSocket}
 
@@ -13,6 +13,6 @@ class SearchController @Inject()(implicit actorSystem: ActorSystem, materializer
   extends Controller {
 
   def searchSocket = WebSocket.accept[String, String] {
-    _ => ActorFlow.actorRef(out => AutocompleteActor.props(out))
+    _ => ActorFlow.actorRef(out => AutocompleteActor.props(out), bufferSize = 1, overflowStrategy = OverflowStrategy.dropHead)
   }
 }

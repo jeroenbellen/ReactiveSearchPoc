@@ -10,7 +10,7 @@ class AutocompleteComponent extends React.Component {
         };
         this.autocomplete = this.autocomplete.bind(this);
 
-        this.ws = new WebSocket("ws://localhost:9000/ws/search");
+        this.ws = new WebSocket("ws://" + window.location.href.replace('http://', '').replace('https://', '') + "ws/search");
         this.ws.onmessage = evt => {
             this.setState({
                 output: JSON.stringify(JSON.parse(evt.data), null, 2)

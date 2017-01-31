@@ -31,4 +31,55 @@ class SearchDB @Inject()(playConfiguration: Configuration) {
 
   def createClient(): Client = node.client()
 
+  createClient().admin()
+    .indices().prepareCreate("people")
+    .setSettings(
+      """{
+        "number_of_shards": 1,
+        "analysis": {
+          "filter": {
+            "autocomplete_filter": {
+              "type": "edge_ngram",
+              "min_gram": 1,
+              "max_gram": 50
+            }
+          },
+          "analyzer": {
+            "autocomplete": {
+              "type": "custom",
+              "tokenizer": "standard",
+              "filter": [
+                "lowercase",
+                "autocomplete_filter"
+              ]
+            }
+          }
+        }
+      }"""
+    )
+    .addMapping("people",
+      """
+        {
+          "people": {
+            "properties": {
+              "Full Name": {
+                "type": "string",
+                "analyzer": "autocomplete",
+                "search_analyzer": "standard"
+              },
+              "Country": {
+                "type": "string",
+                "analyzer": "autocomplete",
+                "search_analyzer": "standard"
+              },
+              "Email": {
+                "type": "string",
+                "analyzer": "autocomplete",
+                "search_analyzer": "standard"
+              }
+            }
+          }
+        }
+      """).get()
+
 }

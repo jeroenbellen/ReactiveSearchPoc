@@ -28,7 +28,13 @@ class AutocompleteActor(out: ActorRef, client: Client) extends Actor {
         val response = client
           .prepareSearch("people")
           .setSearchType(SearchType.DEFAULT)
-          .setQuery(QueryBuilders.matchPhrasePrefixQuery("Full Name", snippet))
+          .setQuery(
+            QueryBuilders.multiMatchQuery(snippet)
+              .field("Full Name", 3)
+              .field("Country", 2)
+              .field("Email", 1)
+              .`type`("cross_fields")
+          )
           .setSize(10)
           .get(TimeValue.timeValueSeconds(1))
 

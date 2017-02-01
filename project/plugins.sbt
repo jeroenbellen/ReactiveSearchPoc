@@ -16,3 +16,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-mocha" % "1.1.0")
 addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
 
 addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.5.2")
+
+resolvers += Resolver.url("bintray-kipsigman-sbt-plugins", url("http://dl.bintray.com/kipsigman/sbt-plugins"))(Resolver.ivyStylePatterns)
+
+addSbtPlugin("kipsigman" % "sbt-elastic-beanstalk" % "0.1.4")

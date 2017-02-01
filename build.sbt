@@ -1,8 +1,8 @@
 name := """ReactiveSearchPoc"""
 
-version := "1.0-SNAPSHOT"
+version := "1.2-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, ElasticBeanstalkPlugin)
 
 scalaVersion := "2.11.7"
 
@@ -23,7 +23,9 @@ libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.7"
 libraryDependencies += "com.github.pathikrit" % "better-files_2.11" % "2.17.1"
 
 
-
+maintainer in Docker := "Jeroen"
+dockerExposedPorts := Seq(9000)
+dockerBaseImage := "java:latest"
 
 
 

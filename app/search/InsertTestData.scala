@@ -13,7 +13,7 @@ class InsertTestData @Inject()(application: Application, akkaSystem: ActorSystem
 
   private val testDataActor = akkaSystem.actorOf(TestDataActor.props(searchDB.createClient()))
 
-  application.getFile("/testData").listFiles()
+  application.getFile("/conf/testData").listFiles()
     .map(_.getAbsolutePath)
     .map(File(_))
     .map(_.unzip())

@@ -1,6 +1,6 @@
 name := """ReactiveSearchPoc"""
 
-version := "1.2-SNAPSHOT"
+version := "1.3-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb, ElasticBeanstalkPlugin)
 

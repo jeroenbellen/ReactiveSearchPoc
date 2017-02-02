@@ -20,7 +20,7 @@ class AutocompleteComponent extends React.Component {
         this.ws = new WebSocket(uri);
         this.ws.onmessage = evt => {
             this.setState({
-                output: JSON.stringify(JSON.parse(evt.data), null, 2)
+                output: JSON.parse(evt.data)
             });
         };
     }
@@ -51,7 +51,24 @@ class AutocompleteComponent extends React.Component {
                     <input type="text" value={this.state.snippet} onChange={this.autocomplete}/>
                 </div>
                 <div>
-                    <pre>{this.state.output}</pre>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Country</th>
+                        </tr>
+                        </thead>
+                        {(this.state.output || []).map((row, i) =>
+                            <tr key={i}>
+                                <td>{row.id}</td>
+                                <td>{row.fullName}</td>
+                                <td>{row.email}</td>
+                                <td>{row.country}</td>
+                            </tr>
+                        )}
+                    </table>
                 </div>
             </div>
         )

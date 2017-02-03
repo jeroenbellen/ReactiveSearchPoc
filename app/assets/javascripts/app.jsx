@@ -20,7 +20,7 @@ class AutocompleteComponent extends React.Component {
         this.ws = new WebSocket(uri);
         this.ws.onmessage = evt => {
             this.setState({
-                output: JSON.parse(evt.data)
+                output: JSON.parse(evt.data).result
             });
         };
     }
